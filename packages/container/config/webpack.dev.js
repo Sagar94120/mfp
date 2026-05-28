@@ -1,10 +1,8 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { merge } = require("webpack-merge");
 const commonConfig = require("./webpack.common");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const packageJSON = require("../package.json");
-
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const devConfig = {
   mode: "development",
@@ -22,10 +20,6 @@ const devConfig = {
         marketing: "marketing@http://localhost:8081/remoteEntry.js",
       },
       shared: packageJSON.dependencies,
-    }),
-    // HtmlWebpackPlugin is used to generate an HTML file that includes the webpack bundles. It takes a template HTML file and injects the necessary script tags for the bundled JavaScript files.
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
     }),
   ],
 };
